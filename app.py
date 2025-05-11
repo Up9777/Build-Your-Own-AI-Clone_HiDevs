@@ -17,8 +17,8 @@ print("Using Groq API key:", GROQ_API_KEY[:8] + "..." if GROQ_API_KEY else "Not 
 
 # Fallback if using Streamlit Cloud: fix for SQLite error
 try:
-    import pysqlite3
-    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+    import sqlite3
+    sys.modules["sqlite3"] = sys.modules.pop("sqlite3")
 except ModuleNotFoundError:
     st.warning("pysqlite3 not found; sqlite3 may cause issues on some systems.")
 
