@@ -81,7 +81,7 @@ chat = ChatGroq(
 
 # --- ChromaDB Setup ---
 try:
-    chroma_client = chromadb.PersistentClient(path="./chroma_db")
+    chroma_client = chromadb.Client()  # Use standard Client instead of PersistentClient
     collection = chroma_client.get_or_create_collection(name="ai_knowledge_base")
 except Exception as e:
     st.error(f"ChromaDB Initialization Error: {e}")
