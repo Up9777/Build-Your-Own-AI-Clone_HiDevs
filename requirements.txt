@@ -1,1 +1,6 @@
-# Add your project dependencies here
+streamlit
+langchain
+langchain_huggingface
+langchain_groq
+sentence-transformers
+chromadb

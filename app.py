@@ -7,20 +7,13 @@ from sentence_transformers import SentenceTransformer
 import chromadb
 import uuid
 import os
+import sqlite3  # Use built-in sqlite3
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+# --- Environment Setup ---
+GROQ_API_KEY = os.getenv("GROQ_API_KEY") or "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"
 
-
-# Example use
+# Debug print for key
 print("Using Groq API key:", GROQ_API_KEY[:8] + "..." if GROQ_API_KEY else "Not set")
-
-
-# Fallback if using Streamlit Cloud: fix for SQLite error
-try:
-    import sqlite3
-    sys.modules["sqlite3"] = sys.modules.pop("sqlite3")
-except ModuleNotFoundError:
-    st.warning("pysqlite3 not found; sqlite3 may cause issues on some systems.")
 
 # --- Custom UI Styling ---
 st.markdown("""
@@ -79,12 +72,6 @@ st.markdown("""
 # --- Model & Embeddings Setup ---
 embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
-
-# Use Streamlit secrets for Groq API Key
-GROQ_API_KEY = "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"
-
-
-
 
 chat = ChatGroq(
     temperature=0.7,
